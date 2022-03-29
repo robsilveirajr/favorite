@@ -6,7 +6,6 @@ export interface ProductFavoriteProps {
   isFavorite: boolean
   onFavoriteClicked: () => void
 }
-// FavoriteButton component that change button color to red when product id found on localStorage
 const FavoriteButton = styled.button<{ isFavorite: boolean }>`
   background: ${props => (props.isFavorite ? 'red' : 'white')};
   color: ${props => (props.isFavorite ? 'white' : 'black')};
@@ -20,8 +19,6 @@ const FavoriteButton = styled.button<{ isFavorite: boolean }>`
     color: ${props => (props.isFavorite ? 'red' : 'white')};
   }
 `
-
-// Component that add favorite button to product
 export const ProductFavorite: React.FC<ProductFavoriteProps> = props => {
   const [isFavorite, setIsFavorite] = useState(props.isFavorite)
   const handleFavoriteClicked = useCallback(() => {

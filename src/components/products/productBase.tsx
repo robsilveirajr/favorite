@@ -11,7 +11,6 @@ export interface ProductBaseProps {
 }
 
 export const ProductBase: React.FC<ProductBaseProps> = props => {
-  // const retrieve products id and save it on localStorage as array
   const handleFavoriteClicked = () => {
     const favoriteIds = JSON.parse(localStorage.getItem('favoriteIds') || '[]')
     const productId = props.id

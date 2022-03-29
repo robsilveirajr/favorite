@@ -1,4 +1,4 @@
-# Componente de Favoritar produtos
+# Componente de favoritar produtos
 
 Passos:
 - Yarn install

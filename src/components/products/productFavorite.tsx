@@ -1,40 +1,53 @@
-import React, { useState, useCallback } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import styled from 'styled-components'
 
 export interface ProductFavoriteProps {
   id: number
   isFavorite: boolean
-  onFavoriteClicked: () => void
 }
-
 const FavoriteButton = styled.button<{ isFavorite: boolean }>`
-  background: ${props => (props.isFavorite ? 'red' : 'white')};
-  color: ${props => (props.isFavorite ? 'white' : 'black')};
-  border: 1px solid ${props => (props.isFavorite ? 'red' : 'black')};
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
+  background: ${props => (props.isFavorite ? '#ff0000' : '#fff')};
+  color: ${props => (props.isFavorite ? '#fff' : '#000')};
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-left: 10px;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  &:hover {
-    background: ${props => (props.isFavorite ? 'white' : 'red')};
-    color: ${props => (props.isFavorite ? 'red' : 'white')};
-  }
 `
+const FavoriteIcon = styled.span<{ isFavorite: boolean }>`
+  color: ${props => (props.isFavorite ? '#fff' : '#000')};
+  font-size: 20px;
+`
+
 export const ProductFavorite: React.FC<ProductFavoriteProps> = props => {
   const [isFavorite, setIsFavorite] = useState(props.isFavorite)
 
-  // Check if the product ID is in localStorage
-  const isFavoriteID = (id: number): boolean => {
-    const favoriteIds = JSON.parse(localStorage.getItem('favoriteIds') || '[]')
-    return favoriteIds.includes(id)
-  }
-  const handleFavoriteClicked = useCallback(() => {
-    setIsFavorite(!isFavorite)
-    props.onFavoriteClicked()
-  }, [isFavorite, props.onFavoriteClicked])
+  const handleClick = useCallback(() => {
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]')
+    const isFavorite = favorites.find(id => id === props.id)
+
+    if (isFavorite) {
+      const newFavorites = favorites.filter(id => id !== props.id)
+      localStorage.setItem('favorites', JSON.stringify(newFavorites))
+      setIsFavorite(false)
+    } else {
+      localStorage.setItem(
+        'favorites',
+        JSON.stringify([...favorites, props.id])
+      )
+      setIsFavorite(true)
+    }
+  }, [props.id])
+
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]')
+    const isFavorite = favorites.find(id => id === props.id)
+    setIsFavorite(!!isFavorite)
+  }, [props.id])
+
   return (
-    <FavoriteButton isFavorite={isFavorite} onClick={handleFavoriteClicked}>
-      {isFavoriteID ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}
+    <FavoriteButton onClick={handleClick} isFavorite={isFavorite}>
+      <FavoriteIcon isFavorite={isFavorite}>&#9733;</FavoriteIcon>
     </FavoriteButton>
   )
 }

@@ -11,20 +11,6 @@ export interface ProductBaseProps {
 }
 
 export const ProductBase: React.FC<ProductBaseProps> = props => {
-  const handleFavoriteClicked = () => {
-    const favoriteIds = JSON.parse(localStorage.getItem('favoriteIds') || '[]')
-    const productId = props.id
-    const isFavorite = favoriteIds.includes(productId)
-
-    if (isFavorite) {
-      const index = favoriteIds.indexOf(productId)
-      favoriteIds.splice(index, 1)
-    } else {
-      favoriteIds.push(productId)
-    }
-
-    localStorage.setItem('favoriteIds', JSON.stringify(favoriteIds))
-  }
   return (
     <div className="product-base">
       <div className="product-base__image">
@@ -36,13 +22,7 @@ export const ProductBase: React.FC<ProductBaseProps> = props => {
           <span className="product-base__list-price">{props.listPrice}</span>
           <span className="product-base__sale-price">{props.salePrice}</span>
         </p>
-        <ProductFavorite
-          id={props.id}
-          isFavorite={false}
-          onFavoriteClicked={() => {
-            handleFavoriteClicked()
-          }}
-        />
+        <ProductFavorite id={props.id} isFavorite={false} />
       </div>
     </div>
   )

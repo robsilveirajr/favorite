@@ -6,17 +6,15 @@ export interface ProductFavoriteProps {
   isFavorite: boolean
 }
 const FavoriteButton = styled.button<{ isFavorite: boolean }>`
-  background: ${props => (props.isFavorite ? '#ff0000' : '#fff')};
-  color: ${props => (props.isFavorite ? '#fff' : '#000')};
-  border: 1px solid #000;
+  background: transparent;
+  border: 1px solid transparent;
   border-radius: 5px;
-  padding: 5px 10px;
-  margin-left: 10px;
   cursor: pointer;
+  position: relative;
 `
 const FavoriteIcon = styled.span<{ isFavorite: boolean }>`
-  color: ${props => (props.isFavorite ? '#fff' : '#000')};
-  font-size: 20px;
+  color: ${props => (props.isFavorite ? '#00AE7C' : '#000')};
+  font-size: 32px;
 `
 
 export const ProductFavorite: React.FC<ProductFavoriteProps> = props => {
@@ -47,7 +45,7 @@ export const ProductFavorite: React.FC<ProductFavoriteProps> = props => {
 
   return (
     <FavoriteButton onClick={handleClick} isFavorite={isFavorite}>
-      <FavoriteIcon isFavorite={isFavorite}>&#9733;</FavoriteIcon>
+      <FavoriteIcon isFavorite={isFavorite}>♥</FavoriteIcon>
     </FavoriteButton>
   )
 }

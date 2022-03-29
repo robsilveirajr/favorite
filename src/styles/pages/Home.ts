@@ -10,9 +10,10 @@ export const Container = styled.div`
   flex-direction: column;
 
   h1 {
-    font-size: 54px;
+    font-size: 18px;
     color: ${props => props.theme.colors.primary};
-    margin-top: 40px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
 
   p {

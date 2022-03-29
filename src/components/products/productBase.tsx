@@ -38,6 +38,7 @@ export const ProductBase: React.FC<ProductBaseProps> = props => {
           <span className="product-base__sale-price">{props.salePrice}</span>
         </p>
         <ProductFavorite
+          id={props.id}
           isFavorite={false}
           onFavoriteClicked={() => {
             handleFavoriteClicked()

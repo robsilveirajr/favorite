@@ -15,10 +15,4 @@ export const Container = styled.div`
     margin-top: 1rem;
     margin-bottom: 1rem;
   }
-
-  p {
-    margin-top: 24px;
-    font-size: 24px;
-    line-height: 32px;
-  }
 `

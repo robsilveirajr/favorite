@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { ProductBase } from './ProductBase'
 
-const ProductList = styled.div`
+const ProductListContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
@@ -13,9 +13,9 @@ const ProductList = styled.div`
     grid-template-columns: repeat(2, 1fr);
   }
 `
-export const ProductListContainer: React.FC = () => {
+export const ProductList: React.FC = () => {
   return (
-    <ProductList>
+    <ProductListContainer>
       <ProductBase
         imageUrl="https://dkdkf5wiwtstx.cloudfront.net/Custom/Content/Products/10/89/1089616_blusa-cropped-chenile-trama-100277816_m2_637822572985577933.jpg"
         listPrice={119}
@@ -37,6 +37,6 @@ export const ProductListContainer: React.FC = () => {
         name="calça jeans wide leg cropped"
         id={3}
       />
-    </ProductList>
+    </ProductListContainer>
   )
 }

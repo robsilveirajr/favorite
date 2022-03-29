@@ -3,6 +3,7 @@ import React from 'react'
 import { ProductFavorite } from './productFavorite'
 
 export interface ProductBaseProps {
+  id: number
   name: string
   listPrice: number
   salePrice: number
@@ -10,10 +11,21 @@ export interface ProductBaseProps {
 }
 
 export const ProductBase: React.FC<ProductBaseProps> = props => {
+  // const retrieve products id and save it on localStorage as array
   const handleFavoriteClicked = () => {
-    console.log('Favorite clicked')
-  }
+    const favoriteIds = JSON.parse(localStorage.getItem('favoriteIds') || '[]')
+    const productId = props.id
+    const isFavorite = favoriteIds.includes(productId)
 
+    if (isFavorite) {
+      const index = favoriteIds.indexOf(productId)
+      favoriteIds.splice(index, 1)
+    } else {
+      favoriteIds.push(productId)
+    }
+
+    localStorage.setItem('favoriteIds', JSON.stringify(favoriteIds))
+  }
   return (
     <div className="product-base">
       <div className="product-base__image">
